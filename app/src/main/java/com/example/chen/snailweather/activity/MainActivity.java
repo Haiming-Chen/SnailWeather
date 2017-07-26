@@ -24,9 +24,9 @@ import butterknife.ButterKnife;
 /**
  * The type Main activity.
  */
+
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
-
     List<AddCityBean> data = new ArrayList<>();
     BottomadApter adapter;
     String str[] = {"深圳", "上海", "广州", "北京", "杭州", "长沙", "重庆", "南京", "武汉"};
@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         initdata();
         initview();
         settoolbar();
+
     }
 
     private void initview() {
