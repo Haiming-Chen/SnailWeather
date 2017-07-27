@@ -18,6 +18,7 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/time_zw"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="今天"
@@ -25,6 +26,7 @@
                 android:textSize="16sp" />
 
             <TextView
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2017-07-25"
@@ -51,6 +53,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/cond_txtd"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -72,6 +75,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/cond_txtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -100,6 +104,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tmp_max"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"
@@ -120,6 +125,7 @@
                     android:textSize="16sp" />
 
                 <TextView
+                    android:id="@+id/tmp_min"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="5dp"

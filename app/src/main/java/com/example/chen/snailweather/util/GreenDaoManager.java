@@ -46,7 +46,7 @@ public class GreenDaoManager {
     private void init()
     {
         DaoMaster.DevOpenHelper devOpenHelper = new DaoMaster.DevOpenHelper(mApplication.getContext(),
-                "shopping_guide");
+                "city");
         mDaoMaster = new DaoMaster(devOpenHelper.getWritableDatabase());
         mDaoSession = mDaoMaster.newSession();
     }
@@ -54,7 +54,7 @@ public class GreenDaoManager {
     {
         return mDaoMaster;
     }
-    public DaoSession getmDaoSession()
+    public static DaoSession getmDaoSession()
     {
         return mDaoSession;
     }

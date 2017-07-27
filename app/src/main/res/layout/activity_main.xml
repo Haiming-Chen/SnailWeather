@@ -15,7 +15,7 @@
         android:background="@color/mycolor1"
         >
         <TextView
-            android:id="@+id/toolbar_title"
+            android:id="@+id/main_city"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
@@ -25,14 +25,14 @@
     </android.support.v7.widget.Toolbar>
 
     <RelativeLayout
-        android:id="@+id/rl"
+        android:id="@+id/main_rl"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_below="@id/toolbar"
         android:background="@color/mycolor1">
 
         <TextView
-            android:id="@+id/tmp"
+            android:id="@+id/mian_tmp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="15dp"
@@ -43,18 +43,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/tmp"
+            android:layout_below="@id/mian_tmp"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="5dp">
 
             <TextView
+                android:id="@+id/cond_txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="多云"
                 android:textColor="@color/white"
                 android:textSize="16sp" />
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/update_loc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2016-08-31 11:52"
@@ -78,6 +79,7 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/main_dir"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
@@ -86,6 +88,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/mian_sc"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="2-4级"
@@ -109,6 +112,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/main_hum"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="70%"
@@ -132,6 +136,7 @@
                     android:textSize="14sp" />
 
                 <TextView
+                    android:id="@+id/mian_fl"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="28.8°"
@@ -141,15 +146,20 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/mRelativeLayout"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mian_recycler_View1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/rl"
+        android:layout_below="@id/main_rl"
         />
-
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mian_recycler_View2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mian_recycler_View1"
+        />
     <com.example.chen.snailweather.view.BottomRecyclerView
-        android:id="@+id/recycler_View"
+        android:id="@+id/mian_recycler_View"
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true" />

@@ -16,7 +16,7 @@ import java.util.List;
 public class BottomadApter extends BaseQuickAdapter<AddCityBean,BaseViewHolder> {
 
     public BottomadApter(@Nullable List<AddCityBean> data) {
-        super(R.layout.item, data);
+        super(R.layout.bottom_rv_item, data);
     }
 
 
