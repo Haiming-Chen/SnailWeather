@@ -3,9 +3,6 @@ package com.example.chen.snailweather.db;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.ToMany;
-import org.greenrobot.greendao.annotation.ToOne;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -18,16 +15,9 @@ public class CityDB {
     private Long id;
 
     @NotNull
-    @Unique
     private String cityName;
     private int cityCode;
     private int provincesId;
-
-  /*  private Long p_id;  // 关联两个表的外键
-    @ToOne(joinProperty = "p_id")*/
-    @ToMany(referencedJoinProperty = "p_id")
-    private ProvincesDB mProvincesDB;  // 源实体
-
     @Generated(hash = 2015038932)
     public CityDB(Long id, @NotNull String cityName, int cityCode,
             int provincesId) {
@@ -63,5 +53,4 @@ public class CityDB {
     public void setProvincesId(int provincesId) {
         this.provincesId = provincesId;
     }
-
 }

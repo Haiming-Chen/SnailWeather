@@ -44,7 +44,7 @@ public class CityDBDao extends AbstractDao<CityDB, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"CITY_DB\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"CITY_NAME\" TEXT NOT NULL UNIQUE ," + // 1: cityName
+                "\"CITY_NAME\" TEXT NOT NULL ," + // 1: cityName
                 "\"CITY_CODE\" INTEGER NOT NULL ," + // 2: cityCode
                 "\"PROVINCES_ID\" INTEGER NOT NULL );"); // 3: provincesId
     }

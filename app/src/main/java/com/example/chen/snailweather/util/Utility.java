@@ -1,20 +1,5 @@
 package com.example.chen.snailweather.util;
 
-import android.text.TextUtils;
-
-import com.alibaba.fastjson.JSON;
-import com.example.chen.snailweather.activity.mApplication;
-import com.example.chen.snailweather.db.CityDB;
-import com.example.chen.snailweather.db.CountyDB;
-import com.example.chen.snailweather.db.ProvincesDB;
-import com.example.chen.snailweather.greendao.gen.CityDBDao;
-import com.example.chen.snailweather.greendao.gen.CountyDBDao;
-import com.example.chen.snailweather.greendao.gen.ProvincesDBDao;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-
-
 /**
  * @name SnailWeather
  * @class name：com.example.chen.snailweather.util
@@ -23,7 +8,7 @@ import org.json.JSONException;
  * @class 描述
  */
 public class Utility {
-    public static boolean handleProvincesRequest(String request){
+  /*  public static boolean handleProvincesRequest(String request){
         if (!TextUtils.isEmpty(request)){
             ProvincesDB provinces = JSON.parseObject(request, ProvincesDB.class);
             ProvincesDB mProvincesDB = new ProvincesDB(null,provinces.getProvincesName(),provinces.getProvincesCode());
@@ -50,5 +35,5 @@ public class Utility {
             mCountyDBDao.insert(mCountyDB);
         }
         return false;
-    }
+    }*/
 }

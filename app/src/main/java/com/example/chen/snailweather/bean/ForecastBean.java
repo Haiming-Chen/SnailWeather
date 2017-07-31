@@ -3,10 +3,12 @@ package com.example.chen.snailweather.bean;
 import java.util.List;
 
 /**
- * Created by chen on 2017/7/27 0027.
+ * 类名: ForecastBean
+ * 作者: 陈海明
+ * 时间: 2017-07-31 16:08
+ * 描述: NULL
  */
-
-public class NoticeBean {
+public class ForecastBean {
 
     private List<HeWeather5Bean> HeWeather5;
 
@@ -20,8 +22,8 @@ public class NoticeBean {
 
     public static class HeWeather5Bean {
         /**
-         * basic : {"city":"长沙","cnty":"中国","id":"CN101250101","lat":"28.19408989","lon":"112.98227692","update":{"loc":"2017-07-27 20:49","utc":"2017-07-27 12:49"}}
-         * daily_forecast : [{"astro":{"mr":"09:34","ms":"22:15","sr":"05:47","ss":"19:21"},"cond":{"code_d":"100","code_n":"100","txt_d":"晴","txt_n":"晴"},"date":"2017-07-27","hum":"46","pcpn":"0.0","pop":"0","pres":"1001","tmp":{"max":"40","min":"29"},"uv":"11","vis":"16","wind":{"deg":"144","dir":"东南风","sc":"微风","spd":"4"}},{"astro":{"mr":"10:30","ms":"22:51","sr":"05:48","ss":"19:21"},"cond":{"code_d":"100","code_n":"101","txt_d":"晴","txt_n":"多云"},"date":"2017-07-28","hum":"47","pcpn":"0.0","pop":"84","pres":"1003","tmp":{"max":"39","min":"29"},"uv":"9","vis":"20","wind":{"deg":"79","dir":"东北风","sc":"微风","spd":"4"}},{"astro":{"mr":"11:26","ms":"23:27","sr":"05:48","ss":"19:20"},"cond":{"code_d":"300","code_n":"101","txt_d":"阵雨","txt_n":"多云"},"date":"2017-07-29","hum":"54","pcpn":"3.8","pop":"97","pres":"1001","tmp":{"max":"37","min":"29"},"uv":"10","vis":"18","wind":{"deg":"359","dir":"北风","sc":"微风","spd":"8"}},{"astro":{"mr":"12:19","ms":"12:45","sr":"05:49","ss":"19:19"},"cond":{"code_d":"300","code_n":"101","txt_d":"阵雨","txt_n":"多云"},"date":"2017-07-30","hum":"64","pcpn":"2.8","pop":"69","pres":"999","tmp":{"max":"36","min":"30"},"uv":"10","vis":"19","wind":{"deg":"9","dir":"北风","sc":"微风","spd":"8"}},{"astro":{"mr":"13:12","ms":"00:02","sr":"05:49","ss":"19:19"},"cond":{"code_d":"300","code_n":"101","txt_d":"阵雨","txt_n":"多云"},"date":"2017-07-31","hum":"59","pcpn":"0.6","pop":"34","pres":"997","tmp":{"max":"35","min":"29"},"uv":"11","vis":"18","wind":{"deg":"314","dir":"西北风","sc":"微风","spd":"7"}},{"astro":{"mr":"14:04","ms":"00:39","sr":"05:50","ss":"19:18"},"cond":{"code_d":"300","code_n":"101","txt_d":"阵雨","txt_n":"多云"},"date":"2017-08-01","hum":"60","pcpn":"0.2","pop":"60","pres":"997","tmp":{"max":"33","min":"29"},"uv":"7","vis":"16","wind":{"deg":"325","dir":"西北风","sc":"微风","spd":"6"}},{"astro":{"mr":"14:56","ms":"01:18","sr":"05:50","ss":"19:17"},"cond":{"code_d":"300","code_n":"101","txt_d":"阵雨","txt_n":"多云"},"date":"2017-08-02","hum":"54","pcpn":"0.0","pop":"77","pres":"997","tmp":{"max":"35","min":"29"},"uv":"8","vis":"16","wind":{"deg":"320","dir":"西北风","sc":"微风","spd":"6"}}]
+         * basic : {"city":"长沙","cnty":"中国","id":"CN101250101","lat":"28.19408989","lon":"112.98227692","update":{"loc":"2017-07-31 15:50","utc":"2017-07-31 07:50"}}
+         * daily_forecast : [{"astro":{"mr":"13:12","ms":"00:02","sr":"05:49","ss":"19:19"},"cond":{"code_d":"300","code_n":"300","txt_d":"阵雨","txt_n":"阵雨"},"date":"2017-07-31","hum":"73","pcpn":"4.2","pop":"98","pres":"997","tmp":{"max":"33","min":"28"},"uv":"11","vis":"15","wind":{"deg":"287","dir":"西北风","sc":"微风","spd":"10"}},{"astro":{"mr":"14:04","ms":"00:39","sr":"05:50","ss":"19:18"},"cond":{"code_d":"300","code_n":"101","txt_d":"阵雨","txt_n":"多云"},"date":"2017-08-01","hum":"83","pcpn":"32.8","pop":"99","pres":"997","tmp":{"max":"32","min":"29"},"uv":"9","vis":"16","wind":{"deg":"289","dir":"西北风","sc":"微风","spd":"12"}},{"astro":{"mr":"14:56","ms":"01:18","sr":"05:50","ss":"19:17"},"cond":{"code_d":"101","code_n":"101","txt_d":"多云","txt_n":"多云"},"date":"2017-08-02","hum":"75","pcpn":"9.6","pop":"80","pres":"998","tmp":{"max":"34","min":"30"},"uv":"9","vis":"17","wind":{"deg":"176","dir":"南风","sc":"微风","spd":"6"}}]
          * status : ok
          */
 
@@ -60,7 +62,7 @@ public class NoticeBean {
              * id : CN101250101
              * lat : 28.19408989
              * lon : 112.98227692
-             * update : {"loc":"2017-07-27 20:49","utc":"2017-07-27 12:49"}
+             * update : {"loc":"2017-07-31 15:50","utc":"2017-07-31 07:50"}
              */
 
             private String city;
@@ -120,8 +122,8 @@ public class NoticeBean {
 
             public static class UpdateBean {
                 /**
-                 * loc : 2017-07-27 20:49
-                 * utc : 2017-07-27 12:49
+                 * loc : 2017-07-31 15:50
+                 * utc : 2017-07-31 07:50
                  */
 
                 private String loc;
@@ -147,17 +149,17 @@ public class NoticeBean {
 
         public static class DailyForecastBean {
             /**
-             * astro : {"mr":"09:34","ms":"22:15","sr":"05:47","ss":"19:21"}
-             * cond : {"code_d":"100","code_n":"100","txt_d":"晴","txt_n":"晴"}
-             * date : 2017-07-27
-             * hum : 46
-             * pcpn : 0.0
-             * pop : 0
-             * pres : 1001
-             * tmp : {"max":"40","min":"29"}
+             * astro : {"mr":"13:12","ms":"00:02","sr":"05:49","ss":"19:19"}
+             * cond : {"code_d":"300","code_n":"300","txt_d":"阵雨","txt_n":"阵雨"}
+             * date : 2017-07-31
+             * hum : 73
+             * pcpn : 4.2
+             * pop : 98
+             * pres : 997
+             * tmp : {"max":"33","min":"28"}
              * uv : 11
-             * vis : 16
-             * wind : {"deg":"144","dir":"东南风","sc":"微风","spd":"4"}
+             * vis : 15
+             * wind : {"deg":"287","dir":"西北风","sc":"微风","spd":"10"}
              */
 
             private AstroBean astro;
@@ -262,10 +264,10 @@ public class NoticeBean {
 
             public static class AstroBean {
                 /**
-                 * mr : 09:34
-                 * ms : 22:15
-                 * sr : 05:47
-                 * ss : 19:21
+                 * mr : 13:12
+                 * ms : 00:02
+                 * sr : 05:49
+                 * ss : 19:19
                  */
 
                 private String mr;
@@ -308,10 +310,10 @@ public class NoticeBean {
 
             public static class CondBean {
                 /**
-                 * code_d : 100
-                 * code_n : 100
-                 * txt_d : 晴
-                 * txt_n : 晴
+                 * code_d : 300
+                 * code_n : 300
+                 * txt_d : 阵雨
+                 * txt_n : 阵雨
                  */
 
                 private String code_d;
@@ -354,8 +356,8 @@ public class NoticeBean {
 
             public static class TmpBean {
                 /**
-                 * max : 40
-                 * min : 29
+                 * max : 33
+                 * min : 28
                  */
 
                 private String max;
@@ -380,10 +382,10 @@ public class NoticeBean {
 
             public static class WindBean {
                 /**
-                 * deg : 144
-                 * dir : 东南风
+                 * deg : 287
+                 * dir : 西北风
                  * sc : 微风
-                 * spd : 4
+                 * spd : 10
                  */
 
                 private String deg;

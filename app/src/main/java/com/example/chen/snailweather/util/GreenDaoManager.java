@@ -1,6 +1,5 @@
 package com.example.chen.snailweather.util;
 
-import com.example.chen.snailweather.activity.MainActivity;
 import com.example.chen.snailweather.activity.mApplication;
 import com.example.chen.snailweather.greendao.gen.DaoMaster;
 import com.example.chen.snailweather.greendao.gen.DaoSession;
@@ -14,8 +13,9 @@ import com.example.chen.snailweather.greendao.gen.DaoSession;
  */
 public class GreenDaoManager {
 
+
     private DaoMaster mDaoMaster;
-    private DaoSession mDaoSession;
+    private static DaoSession mDaoSession;
 
     private GreenDaoManager()
     {

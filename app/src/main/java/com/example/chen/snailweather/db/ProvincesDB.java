@@ -3,7 +3,6 @@ package com.example.chen.snailweather.db;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -16,7 +15,6 @@ public class ProvincesDB {
     private Long id;
 
     @NotNull
-    @Unique
     private String provincesName;
     private int provincesCode;
    @Generated(hash = 917886715)
@@ -46,4 +44,8 @@ public class ProvincesDB {
    public void setProvincesCode(int provincesCode) {
        this.provincesCode = provincesCode;
    }
+
+
+
+
 }

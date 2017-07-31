@@ -44,7 +44,7 @@ public class CountyDBDao extends AbstractDao<CountyDB, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"COUNTY_DB\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"COUNTY_NAME\" TEXT NOT NULL UNIQUE ," + // 1: countyName
+                "\"COUNTY_NAME\" TEXT NOT NULL ," + // 1: countyName
                 "\"COUNTY_CODE\" INTEGER NOT NULL ," + // 2: countyCode
                 "\"CITY_ID\" INTEGER NOT NULL );"); // 3: cityId
     }

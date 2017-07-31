@@ -43,7 +43,7 @@ public class ProvincesDBDao extends AbstractDao<ProvincesDB, Long> {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "\"PROVINCES_DB\" (" + //
                 "\"_id\" INTEGER PRIMARY KEY AUTOINCREMENT ," + // 0: id
-                "\"PROVINCES_NAME\" TEXT NOT NULL UNIQUE ," + // 1: provincesName
+                "\"PROVINCES_NAME\" TEXT NOT NULL ," + // 1: provincesName
                 "\"PROVINCES_CODE\" INTEGER NOT NULL );"); // 2: provincesCode
     }
 

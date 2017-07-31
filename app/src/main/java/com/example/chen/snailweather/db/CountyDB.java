@@ -3,9 +3,6 @@ package com.example.chen.snailweather.db;
 import org.greenrobot.greendao.annotation.Entity;
 import org.greenrobot.greendao.annotation.Id;
 import org.greenrobot.greendao.annotation.NotNull;
-import org.greenrobot.greendao.annotation.ToMany;
-import org.greenrobot.greendao.annotation.ToOne;
-import org.greenrobot.greendao.annotation.Unique;
 import org.greenrobot.greendao.annotation.Generated;
 
 /**
@@ -16,16 +13,10 @@ import org.greenrobot.greendao.annotation.Generated;
 public class CountyDB {
     @Id(autoincrement = true)
     private Long id;
-
     @NotNull
-    @Unique
     private String countyName;
     private int countyCode;
     private int cityId;
-
-    @ToMany(referencedJoinProperty = "c_id")
-    private CountyDB mCountyDB;  // 源实体
-
     @Generated(hash = 1264248947)
     public CountyDB(Long id, @NotNull String countyName, int countyCode,
             int cityId) {
@@ -61,4 +52,5 @@ public class CountyDB {
     public void setCityId(int cityId) {
         this.cityId = cityId;
     }
+
 }
