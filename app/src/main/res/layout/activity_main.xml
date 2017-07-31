@@ -12,8 +12,8 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/mycolor1"
-        >
+        android:background="@color/mycolor1">
+
         <TextView
             android:id="@+id/main_city"
             android:layout_width="wrap_content"
@@ -53,16 +53,25 @@
                 android:layout_height="wrap_content"
                 android:text="多云"
                 android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="1dip"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="@color/white" />
+
             <TextView
-                android:id="@+id/update_loc"
+                android:id="@+id/mian_api"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2016-08-31 11:52"
+                android:layout_height="22dp"
+                android:text="空气优 45"
                 android:textColor="@color/white"
-                android:layout_marginLeft="10dp"
-                android:textSize="12sp" />
+                android:textSize="14sp" />
         </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -146,18 +155,55 @@
         </LinearLayout>
     </RelativeLayout>
 
+    <LinearLayout
+        android:id="@+id/marqueeView_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/main_rl"
+        android:background="@color/white">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:layout_gravity="center"
+            android:alpha="0.6"
+            android:background="@drawable/ico_msg" />
+
+        <com.sunfusheng.marqueeview.MarqueeView
+            android:id="@+id/marqueeView"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:alpha="0.6"
+            app:mvInterval="5000"
+            app:mvTextColor="@color/mycolor1"
+            app:mvTextSize="14sp" />
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:layout_below="@id/marqueeView_bg"
+        android:alpha="0.4"
+        android:background="@color/black" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mian_recycler_View1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/main_rl"
-        />
+        android:layout_below="@id/view"
+        android:layout_marginTop="5dp" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/mian_recycler_View2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mian_recycler_View1"
-        />
+        android:layout_below="@id/mian_recycler_View1" />
+
     <com.example.chen.snailweather.view.BottomRecyclerView
         android:id="@+id/mian_recycler_View"
         android:layout_width="match_parent"

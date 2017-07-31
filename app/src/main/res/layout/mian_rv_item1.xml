@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:padding="5dp">
+        android:padding="10dp">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -18,72 +18,16 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/time_zw"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="今天"
-                android:textColor="@color/mycolor1"
-                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="2017-07-25"
-                android:textColor="@color/mycolor1"
-                android:textSize="16sp" />
+                android:text="今天"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:alpha="0.6"/>
 
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="白天:"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/cond_txtd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="晴"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="晚上:"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/cond_txtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="多云"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -93,47 +37,44 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/cond"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:text="晴转多云"
+                android:alpha="0.6"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="max:"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
+        </LinearLayout>
 
-                <TextView
-                    android:id="@+id/tmp_max"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="33°"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-            </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/tmp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="min:"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tmp_min"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="33°"
-                    android:textColor="@color/mycolor1"
-                    android:textSize="16sp" />
-            </LinearLayout>
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:text="33°/35°"
+                android:alpha="0.6"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
         </LinearLayout>
     </LinearLayout>
-</RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5px"
+        android:layout_below="@id/marqueeView"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:background="@color/black"
+        android:alpha="0.4"
+        />
+</LinearLayout>

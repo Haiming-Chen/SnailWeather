@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/SnailWeather.iml" filepath="$PROJECT_DIR$/.idea/SnailWeather.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SnailWeather.iml" filepath="$PROJECT_DIR$/SnailWeather.iml" />
+      <module fileurl="file://E:\Leam\Android\SnailWeather\.idea\SnailWeather.iml" filepath="E:\Leam\Android\SnailWeather\.idea\SnailWeather.iml" />
       <module fileurl="file://E:\stodio work\SnailWeather\SnailWeather.iml" filepath="E:\stodio work\SnailWeather\SnailWeather.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>

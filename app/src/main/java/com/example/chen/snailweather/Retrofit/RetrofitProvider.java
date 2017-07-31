@@ -1,4 +1,4 @@
-package com.example.chen.snailweather.util;
+package com.example.chen.snailweather.Retrofit;
 
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 
@@ -13,9 +13,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * 描述: NULL
  */
 public class RetrofitProvider {
+    public static final String ENDPOINT = "https://free-api.heweather.com/";
     public static Retrofit get() {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
-        return new Retrofit.Builder().baseUrl(Url.ENDPOINT)
+        return new Retrofit.Builder().baseUrl(ENDPOINT)
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

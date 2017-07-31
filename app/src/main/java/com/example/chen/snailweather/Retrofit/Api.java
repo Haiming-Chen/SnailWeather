@@ -1,6 +1,7 @@
-package com.example.chen.snailweather;
+package com.example.chen.snailweather.Retrofit;
 
 import com.example.chen.snailweather.bean.ForecastBean;
+import com.example.chen.snailweather.bean.CurrentBean;
 import com.example.chen.snailweather.bean.WeatherBean;
 
 import io.reactivex.Observable;
@@ -20,4 +21,7 @@ public interface Api {
 
     @GET("v5/forecast?")
     Observable<Response<ForecastBean>> getForecast(@Query("city") String city, @Query("key") String key);
+
+    @GET("v5/now?")
+    Observable<Response<CurrentBean>>getNow(@Query("city") String city, @Query("key") String key);
 }

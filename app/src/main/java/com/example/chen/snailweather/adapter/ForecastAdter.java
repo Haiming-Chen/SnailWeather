@@ -14,21 +14,18 @@ import java.util.List;
  * Created by chen on 2017/7/27 0027.
  */
 
-public class NoticeAdter extends BaseQuickAdapter<ForecastBean.HeWeather5Bean.DailyForecastBean, BaseViewHolder> {
+public class ForecastAdter extends BaseQuickAdapter<ForecastBean.HeWeather5Bean.DailyForecastBean, BaseViewHolder> {
 
-    public NoticeAdter(@Nullable List<ForecastBean.HeWeather5Bean.DailyForecastBean> data) {
+    public ForecastAdter(@Nullable List<ForecastBean.HeWeather5Bean.DailyForecastBean> data) {
         super(R.layout.mian_rv_item1, data);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, ForecastBean.HeWeather5Bean.DailyForecastBean Daily) {
        // List<ForecastBean.HeWeather5Bean.DailyForecastBean> Daily=item.getDaily_forecast();
-        helper.setText(R.id.time_zw, Daily.getDate())
-                .setText(R.id.date,  Daily.getDate())
-                .setText(R.id.cond_txtd,  Daily.getCond().getTxt_d())
-                .setText(R.id.cond_txtn,  Daily.getCond().getTxt_n())
-                .setText(R.id.tmp_max,  Daily.getTmp().getMax())
-                .setText(R.id.tmp_min,  Daily.getTmp().getMax());
+        helper .setText(R.id.date,  Daily.getDate())
+                .setText(R.id.cond,  Daily.getCond().getTxt_d()+"转"+Daily.getCond().getTxt_n())
+                .setText(R.id.tmp,  Daily.getTmp().getMax()+"°"+"/"+Daily.getTmp().getMax()+"°");
     }
 
     public static String getTodayOrYesterday(long date) {//date 是存储的时间戳
