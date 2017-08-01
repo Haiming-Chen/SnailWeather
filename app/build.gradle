@@ -55,4 +55,8 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     //https://github.com/sfsheng0322/MarqueeView
     compile 'com.sunfusheng:marqueeview:1.2.0'
+    //https://github.com/PhilJay/MPAndroidChart
+   // compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+   // https://github.com/scwang90/SmartRefreshLayout
+    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-5'
 }

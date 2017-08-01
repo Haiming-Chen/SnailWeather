@@ -14,9 +14,9 @@ import java.util.List;
  * Created by chen on 2017/7/27 0027.
  */
 
-public class ForecastAdter extends BaseQuickAdapter<ForecastBean.HeWeather5Bean.DailyForecastBean, BaseViewHolder> {
+public class ForecastAdapter extends BaseQuickAdapter<ForecastBean.HeWeather5Bean.DailyForecastBean, BaseViewHolder> {
 
-    public ForecastAdter(@Nullable List<ForecastBean.HeWeather5Bean.DailyForecastBean> data) {
+    public ForecastAdapter(@Nullable List<ForecastBean.HeWeather5Bean.DailyForecastBean> data) {
         super(R.layout.mian_rv_item1, data);
     }
 
