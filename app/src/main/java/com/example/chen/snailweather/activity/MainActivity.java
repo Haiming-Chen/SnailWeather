@@ -1,6 +1,8 @@
 package com.example.chen.snailweather.activity;
 
+import android.graphics.Color;
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -42,7 +45,7 @@ import retrofit2.Response;
  * The type Main activity.
  */
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
     private static final String TAG = "MainActivity";
 
     @BindView(R.id.main_city)
@@ -71,6 +74,16 @@ public class MainActivity extends AppCompatActivity {
     BottomRecyclerView mRecyclerView;
     @BindView(R.id.marqueeView)
     MarqueeView marqueeView;
+    @BindView(R.id.main_city1)
+    TextView mainCity1;
+    @BindView(R.id.cond_txt1)
+    TextView condTxt1;
+    @BindView(R.id.mian_tmp1)
+    TextView mianTmp1;
+
+    private View tl_collapse;
+    private View tl_expand;
+    private AppBarLayout abl_bar;
 
 
     private Bottom mBottomAdapter;
@@ -80,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
     private String str[] = {"深圳", "上海", "广州", "北京", "杭州", "长沙", "重庆", "南京", "武汉"};
     private static String key = "3f1dbd931bfb4640bbea311eff0efe78";
     private Api api;
+    private int mMaskColor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,19 +104,20 @@ public class MainActivity extends AppCompatActivity {
         settoolbar();
         initview();
         initdata();
-       //initRefreshLayout();
+
+        //initRefreshLayout();
     }
 
     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
         @Override
         public boolean canScrollVertically() {
-            return false;
+            return true;
         }
     };
     LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this) {
         @Override
         public boolean canScrollVertically() {
-            return false;
+            return true;
         }
     };
 
@@ -111,6 +126,12 @@ public class MainActivity extends AppCompatActivity {
         mianRecyclerView1.setLayoutManager(linearLayoutManager);
         mianRecyclerView2.setLayoutManager(linearLayoutManager2);
         setAdddata();
+        mMaskColor = ContextCompat.getColor(this, R.color.mycolor1);
+        abl_bar = (AppBarLayout) findViewById(R.id.abl_bar);
+        tl_expand = (View) findViewById(R.id.tl_expand);
+        tl_collapse = (View) findViewById(R.id.tl_collapse);
+        abl_bar.addOnOffsetChangedListener(this);
+
     }
 
     private void initdata() {
@@ -139,28 +160,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void initNowdata(String City, String tmp, String cond, String Dir, String sc, String hum, String fl) {
         mainCity.setText(City);//城市
+        mainCity1.setText(City);
         mianTmp.setText(tmp + "°");//温度
+        mianTmp1.setText(tmp + "°");//温度
         condTxt.setText(cond);//状况
+        condTxt1.setText(cond);//状况
         mainDir.setText(Dir);//风向
         mianSc.setText(sc);//风力
         mainHum.setText(hum + "%");//湿度
         mianFl.setText(fl + "°");//体感温度
     }
 
-  /*  private void initRefreshLayout(){
-        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-            @Override
-            public void onRefresh(RefreshLayout refreshlayout) {
-                refreshlayout.finishRefresh(2000);
-            }
-        });
-        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
-            @Override
-            public void onLoadmore(RefreshLayout refreshlayout) {
-                refreshlayout.finishLoadmore(2000);
-            }
-        });
-    }*/
+    /*  private void initRefreshLayout(){
+          refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+              @Override
+              public void onRefresh(RefreshLayout refreshlayout) {
+                  refreshlayout.finishRefresh(2000);
+              }
+          });
+          refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+              @Override
+              public void onLoadmore(RefreshLayout refreshlayout) {
+                  refreshlayout.finishLoadmore(2000);
+              }
+          });
+      }*/
     public void getWeather(String city) {
         api.getWeather(city, key)
                 .subscribeOn(Schedulers.io())
@@ -295,5 +319,28 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+        Log.d(TAG, "verticalOffset=" + verticalOffset);
+        int offset = Math.abs(verticalOffset);
+        int total = appBarLayout.getTotalScrollRange();
+        int alphaIn = offset;
+        int alphaOut = (200 - offset) < 0 ? 0 : 200 - offset;
+        int maskColorIn = Color.argb(alphaIn, Color.red(mMaskColor),
+                Color.green(mMaskColor), Color.blue(mMaskColor));
+        int maskColorInDouble = Color.argb(alphaIn * 2, Color.red(mMaskColor),
+                Color.green(mMaskColor), Color.blue(mMaskColor));
+        int maskColorOut = Color.argb(alphaOut * 2, Color.red(mMaskColor),
+                Color.green(mMaskColor), Color.blue(mMaskColor));
+        if (offset <= total / 2) {
+            tl_expand.setVisibility(View.VISIBLE);
+            tl_collapse.setVisibility(View.GONE);
+
+        } else {
+            tl_expand.setVisibility(View.GONE);
+            tl_collapse.setVisibility(View.VISIBLE);
+        }
     }
 }
