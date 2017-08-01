@@ -22,6 +22,6 @@ public interface Api {
     @GET("v5/forecast?")
     Observable<Response<ForecastBean>> getForecast(@Query("city") String city, @Query("key") String key);
 
-    @GET("v5/now?")
+    @GET("v5/include_now?")
     Observable<Response<CurrentBean>>getNow(@Query("city") String city, @Query("key") String key);
 }

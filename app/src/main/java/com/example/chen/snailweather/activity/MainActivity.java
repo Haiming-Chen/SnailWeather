@@ -71,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
     BottomRecyclerView mRecyclerView;
     @BindView(R.id.marqueeView)
     MarqueeView marqueeView;
-    @BindView(R.id.main_city1)
-    TextView mainCity1;
 
 
     private Bottom mBottomAdapter;
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main1);
         ButterKnife.bind(this);
         StatusBarUtil.setColor(MainActivity.this, ContextCompat.getColor(this, R.color.mycolor1), 0);
         settoolbar();
@@ -141,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initNowdata(String City, String tmp, String cond, String Dir, String sc, String hum, String fl) {
         mainCity.setText(City);//城市
-        mainCity1.setText(City);
         mianTmp.setText(tmp + "°");//温度
         condTxt.setText(cond);//状况
         mainDir.setText(Dir);//风向

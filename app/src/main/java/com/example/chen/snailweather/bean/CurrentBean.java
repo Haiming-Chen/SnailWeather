@@ -21,7 +21,7 @@ public class CurrentBean {
     public static class HeWeather5Bean {
         /**
          * basic : {"city":"长沙","cnty":"中国","id":"CN101250101","lat":"28.19408989","lon":"112.98227692","update":{"loc":"2017-07-31 19:48","utc":"2017-07-31 11:48"}}
-         * now : {"cond":{"code":"101","txt":"多云"},"fl":"31","hum":"80","pcpn":"0","pres":"997","tmp":"28","vis":"10","wind":{"deg":"355","dir":"北风","sc":"微风","spd":"9"}}
+         * include_now : {"cond":{"code":"101","txt":"多云"},"fl":"31","hum":"80","pcpn":"0","pres":"997","tmp":"28","vis":"10","wind":{"deg":"355","dir":"北风","sc":"微风","spd":"9"}}
          * status : ok
          */
 
