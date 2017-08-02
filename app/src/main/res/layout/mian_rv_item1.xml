@@ -7,7 +7,8 @@
     <LinearLayout
         android:id="@+id/item_ll"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
+        android:background="@color/white"
         android:gravity="center_vertical"
         android:padding="10dp">
 
@@ -23,10 +24,10 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:alpha="0.6"
                 android:text="今天"
                 android:textColor="@color/black"
-                android:textSize="14sp"
-                android:alpha="0.6"/>
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -34,16 +35,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/img_cond"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginRight="10dp"
+                />
 
             <TextView
                 android:id="@+id/cond"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
-                android:text="晴转多云"
                 android:alpha="0.6"
+                android:text="晴转多云"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
 
@@ -61,8 +69,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="5dp"
-                android:text="33°/35°"
                 android:alpha="0.6"
+                android:text="33°~35°"
                 android:textColor="@color/black"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -74,7 +82,6 @@
         android:layout_below="@id/marqueeView"
         android:layout_marginLeft="15dp"
         android:layout_marginRight="15dp"
-        android:background="@color/black"
         android:alpha="0.4"
-        />
+        android:background="@color/black" />
 </LinearLayout>

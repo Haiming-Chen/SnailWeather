@@ -14,9 +14,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class RetrofitProvider {
     public static final String ENDPOINT = "https://free-api.heweather.com/";
+    public static final String ENDPOINT2 = "http://api.avatardata.cn/HistoryToday/";
+
     public static Retrofit get() {
         OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
         return new Retrofit.Builder().baseUrl(ENDPOINT)
+                .client(builder.build())
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
+    }
+    public static Retrofit get2() {
+        OkHttpClient.Builder builder = new OkHttpClient().newBuilder();
+        return new Retrofit.Builder().baseUrl(ENDPOINT2)
                 .client(builder.build())
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())

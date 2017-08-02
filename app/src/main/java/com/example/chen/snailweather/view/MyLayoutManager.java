@@ -143,7 +143,7 @@ public class MyLayoutManager extends RecyclerView.LayoutManager {
         firstLayout=true;
         for (int i = 0; i < getItemCount(); i++) {
             if (Rect.intersects(displayFrame, allItemFrames.get(i))) {
-               // Log.e("layout","显示==>"+i);
+               // Log.e("include_low","显示==>"+i);
                 if(firstLayout){
                     firstView=i;
                     firstLayout=false;

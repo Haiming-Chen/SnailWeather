@@ -1,11 +1,13 @@
 package com.example.chen.snailweather.adapter;
 
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.chen.snailweather.R;
 import com.example.chen.snailweather.bean.ForecastBean;
+import com.example.chen.snailweather.util.GetImgId;
 
 import java.util.Calendar;
 import java.util.List;
@@ -23,9 +25,16 @@ public class ForecastAdapter extends BaseQuickAdapter<ForecastBean.HeWeather5Bea
     @Override
     protected void convert(BaseViewHolder helper, ForecastBean.HeWeather5Bean.DailyForecastBean Daily) {
        // List<ForecastBean.HeWeather5Bean.DailyForecastBean> Daily=item.getDaily_forecast();
+        String Cond_txt;
+        if (TextUtils.equals(Daily.getCond().getTxt_d(),Daily.getCond().getTxt_n())){
+            Cond_txt=Daily.getCond().getTxt_d();
+        }else{
+            Cond_txt=Daily.getCond().getTxt_d()+"转"+Daily.getCond().getTxt_n();
+        }
         helper .setText(R.id.date,  Daily.getDate())
-                .setText(R.id.cond,  Daily.getCond().getTxt_d()+"转"+Daily.getCond().getTxt_n())
-                .setText(R.id.tmp,  Daily.getTmp().getMax()+"°"+"/"+Daily.getTmp().getMax()+"°");
+                .setImageResource(R.id.img_cond, GetImgId.getimgid(Daily.getCond().getCode_d()))
+                .setText(R.id.cond, Cond_txt)
+                .setText(R.id.tmp, Daily.getTmp().getMax()+"°"+"~"+Daily.getTmp().getMax()+"°");
     }
 
     public static String getTodayOrYesterday(long date) {//date 是存储的时间戳
