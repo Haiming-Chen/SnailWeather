@@ -16,8 +16,8 @@
            >
 
             <ImageView
-                android:layout_width="23dp"
-                android:layout_height="23dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="15dp"
                 android:alpha="0.6"
@@ -31,7 +31,7 @@
                 android:layout_marginRight="10dp"
                 android:alpha="0.6"
                 app:mvInterval="5000"
-                app:mvTextColor="@color/mycolor1"
+                app:mvTextColor="@color/black"
                 app:mvTextSize="14sp" />
         </LinearLayout>
 

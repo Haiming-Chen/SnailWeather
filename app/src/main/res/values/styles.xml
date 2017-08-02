@@ -8,5 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorSecondary">@color/white</item>
     </style>
-
+    <!-- Base application theme. -->
+    <style name="Toolbar" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
 </resources>
