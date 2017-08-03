@@ -1,32 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/bg"
+    android:layout_height="match_parent"
     >
-    <RelativeLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/mian_api"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"
-        >
+        android:layout_alignParentLeft="true"
+        android:text="空气优 45"
+        android:background="@drawable/border_radius_bg"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
+    <TextView
+        android:id="@+id/data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="20dp"
+        android:layout_alignParentRight="true"
+        android:text="8:10"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/mian_tmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/main_city1"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="25dp"
         android:text="33°"
         android:textColor="@color/white"
-        android:textSize="46sp" />
+        android:textSize="56sp" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/mian_tmp"
+        android:layout_below="@+id/mian_tmp"
         android:layout_marginLeft="25dp"
-        android:layout_marginTop="5dp">
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp">
 
         <TextView
             android:id="@+id/cond_txt"
@@ -47,105 +64,71 @@
             android:background="@color/white" />
 
         <TextView
-            android:id="@+id/mian_api"
+            android:id="@+id/main_dir"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="空气优 45"
+            android:layout_marginBottom="5dp"
+            android:text="南风"
             android:textColor="@color/white"
             android:textSize="14sp" />
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="湿度"
+            android:layout_marginRight="3dp"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+        <TextView
+            android:id="@+id/main_hum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="70%"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
+
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/white" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="体感"
+            android:layout_marginRight="3dp"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+        <TextView
+            android:id="@+id/mian_fl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="28.8°"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+
     </LinearLayout>
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:gravity="center">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/main_dir"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="南风"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/mian_sc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="2-4级"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
 
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/white" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="相对湿度"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/main_hum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="70%"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="0.5dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/white" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="体感温度"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/mian_fl"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="28.8°"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </LinearLayout>
-    </LinearLayout>
-    </RelativeLayout>
-</FrameLayout>
+</RelativeLayout>

@@ -67,8 +67,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     TextView mianApi;//空气质量:空气优 pm2.5=30
     @BindView(R.id.main_dir)
     TextView mainDir;//风向
-    @BindView(R.id.mian_sc)
-    TextView mianSc;//分等级
     @BindView(R.id.main_hum)
     TextView mainHum;//相对湿度
     @BindView(R.id.mian_fl)
@@ -112,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        StatusBarUtil.setTranslucentForImageView(this,0, null);
+       StatusBarUtil.setTranslucentForImageView(this,0, null);
         checkGps();
         settoolbar();
         initview();
@@ -185,7 +183,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         condTxt.setText(cond);//状况
         cond_img1.setImageResource(GetImgId.getimgid(condid));//状况
         mainDir.setText(Dir);//风向
-        mianSc.setText(sc);//风力
         mainHum.setText(hum + "%");//湿度
         mianFl.setText(fl + "°");//体感温度
     }
@@ -372,11 +369,12 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         if (offset <= total / 2) {
             tl_expand.setVisibility(View.VISIBLE);
             tl_collapse.setVisibility(View.GONE);
+            StatusBarUtil.setColor(this,ContextCompat.getColor(this,R.color.white),0);
             StatusBarUtil.setTranslucentForImageView(this,0, null);
         } else {
             tl_expand.setVisibility(View.GONE);
             tl_collapse.setVisibility(View.VISIBLE);
-            StatusBarUtil.setTranslucentForImageView(this,0, null);
+            StatusBarUtil.setColor(this,ContextCompat.getColor(this,R.color.white),112);
         }
     }
 
