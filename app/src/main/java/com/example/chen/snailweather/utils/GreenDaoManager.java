@@ -1,4 +1,4 @@
-package com.example.chen.snailweather.util;
+package com.example.chen.snailweather.utils;
 
 import com.example.chen.snailweather.activity.mApplication;
 import com.example.chen.snailweather.greendao.gen.DaoMaster;

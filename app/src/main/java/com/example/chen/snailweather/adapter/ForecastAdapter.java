@@ -7,7 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.example.chen.snailweather.R;
 import com.example.chen.snailweather.bean.ForecastBean;
-import com.example.chen.snailweather.util.GetImgId;
+import com.example.chen.snailweather.utils.GetImgIdUtils;
 
 import java.util.Calendar;
 import java.util.List;
@@ -32,7 +32,7 @@ public class ForecastAdapter extends BaseQuickAdapter<ForecastBean.HeWeather5Bea
             Cond_txt=Daily.getCond().getTxt_d()+"转"+Daily.getCond().getTxt_n();
         }
         helper .setText(R.id.date,  Daily.getDate())
-                .setImageResource(R.id.img_cond, GetImgId.getimgid(Daily.getCond().getCode_d()))
+                .setImageResource(R.id.img_cond, GetImgIdUtils.getimgid(Daily.getCond().getCode_d()))
                 .setText(R.id.cond, Cond_txt)
                 .setText(R.id.tmp, Daily.getTmp().getMax()+"°"+"~"+Daily.getTmp().getMax()+"°");
     }

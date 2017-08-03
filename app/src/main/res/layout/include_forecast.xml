@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="15dp"
+                android:alpha="0.6"
+                android:background="@mipmap/ico_msg" />
+
+            <com.sunfusheng.marqueeview.MarqueeView
+                android:id="@+id/marqueeView"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:alpha="0.6"
+                app:mvInterval="5000"
+                app:mvTextColor="@color/black"
+                app:mvTextSize="14sp" />
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.5px"
+            android:alpha="0.4"
+            android:background="@color/black" />
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/mian_recycler_View1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/view" />
+
+
+</LinearLayout>

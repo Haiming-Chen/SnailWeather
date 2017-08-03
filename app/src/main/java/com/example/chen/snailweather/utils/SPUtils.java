@@ -1,20 +1,16 @@
-package com.example.chen.snailweather.util;
+package com.example.chen.snailweather.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import butterknife.internal.Utils;
-
 /**
- * <pre>
- *     author: Blankj
- *     blog  : http://blankj.com
- *     time  : 2016/08/02
+ *     author: chm
+ *     time  : 2017/07/18
  *     desc  : SP相关工具类
- * </pre>
  */
 public final class SPUtils {
     /**

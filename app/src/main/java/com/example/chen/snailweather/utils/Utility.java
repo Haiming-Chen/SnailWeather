@@ -1,4 +1,4 @@
-package com.example.chen.snailweather.util;
+package com.example.chen.snailweather.utils;
 
 /**
  * @name SnailWeather

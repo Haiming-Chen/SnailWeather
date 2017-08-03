@@ -3,7 +3,7 @@ package com.example.chen.snailweather.activity;
 import android.app.Application;
 import android.content.Context;
 
-import com.example.chen.snailweather.util.GreenDaoManager;
+import com.example.chen.snailweather.utils.GreenDaoManager;
 
 /**
  * @name SnailWeather

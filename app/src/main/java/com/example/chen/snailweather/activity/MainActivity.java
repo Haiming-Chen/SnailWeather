@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -24,7 +25,6 @@ import com.baidu.location.LocationClientOption;
 import com.example.chen.snailweather.R;
 import com.example.chen.snailweather.Retrofit.Api;
 import com.example.chen.snailweather.Retrofit.RetrofitProvider;
-import com.example.chen.snailweather.adapter.Bottom;
 import com.example.chen.snailweather.adapter.ForecastAdapter;
 import com.example.chen.snailweather.adapter.LifeAdapter;
 import com.example.chen.snailweather.bean.AddCityBean;
@@ -33,11 +33,11 @@ import com.example.chen.snailweather.bean.ForecastBean;
 import com.example.chen.snailweather.bean.HistoryBean;
 import com.example.chen.snailweather.bean.LifeBean;
 import com.example.chen.snailweather.bean.WeatherBean;
-import com.example.chen.snailweather.util.GetImgId;
-import com.example.chen.snailweather.util.SPUtils;
-import com.example.chen.snailweather.view.BottomRecyclerView;
-import com.example.chen.snailweather.view.MyLayoutManager;
+import com.example.chen.snailweather.utils.GetImgIdUtils;
+import com.example.chen.snailweather.utils.SPUtils;
+import com.example.chen.snailweather.utils.StatusBarUtils;
 import com.jaeger.library.StatusBarUtil;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.sunfusheng.marqueeview.MarqueeView;
 
 import java.util.ArrayList;
@@ -77,8 +77,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     RecyclerView mianRecyclerView1;//3天的预报
     @BindView(R.id.mian_recycler_View2)
     RecyclerView mianRecyclerView2;//生活指数
-    @BindView(R.id.mian_recycler_View)
-    BottomRecyclerView mRecyclerView;//底部收藏城市
     @BindView(R.id.marqueeView)
     MarqueeView marqueeView;//滚动文字
     @BindView(R.id.main_city1)
@@ -87,11 +85,19 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     ImageView cond_img1;//天气状况
     @BindView(R.id.mian_tmp1)
     TextView mianTmp1;//温度
+    @BindView(R.id.mian_top_bg)
+    ImageView mianTopBg;
+    @BindView(R.id.update_date)
+    TextView updateDate;
+    @BindView(R.id.collapse_layout)
+    CollapsingToolbarLayout collapseLayout;
+    @BindView(R.id.abl_bar)
+    AppBarLayout ablBar;
+    @BindView(R.id.refreshLayout)
+    SmartRefreshLayout refreshLayout;
 
-    private View tl_collapse;
-    private View tl_expand;
-    private AppBarLayout abl_bar;
-    private Bottom mBottomAdapter;
+    private View include_toolbar1;
+    private View include_toolbar2;
     private ForecastAdapter mNoticeAdter;
     private LifeAdapter mLifeAdapter;
     private List<AddCityBean> addCityData = new ArrayList<>();
@@ -103,14 +109,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
     String address = null;
-    String mCity=null;
+    String mCity = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-       StatusBarUtil.setTranslucentForImageView(this,0, null);
+        //StatusBarUtil.transparentStatusBar(MainActivity.this);
+        StatusBarUtils.transparencyBar(this);
         checkGps();
         settoolbar();
         initview();
@@ -119,25 +126,18 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         initdata();
     }
 
-/*    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this) {
-        @Override
-        public boolean canScrollVertically() {
-            return false;
-        }
-    };*/
 
     private void initview() {
         //状态栏透明和间距处理
         //StatusBarUtil.immersive(this);
-       // StatusBarUtil.setPaddingSmart(this, toolbar);
+        // StatusBarUtil.setPaddingSmart(this, toolbar);
         api = RetrofitProvider.get().create(Api.class);
-        abl_bar = (AppBarLayout) findViewById(R.id.abl_bar);
         mianRecyclerView1.setLayoutManager(new LinearLayoutManager(this));
         mianRecyclerView2.setLayoutManager(new LinearLayoutManager(this));
-        tl_expand = (View) findViewById(R.id.tl_expand);
-        tl_collapse = (View) findViewById(R.id.tl_collapse);
-        setAdddata();
-        abl_bar.addOnOffsetChangedListener(this);
+        include_toolbar1 = (View) findViewById(R.id.include_toolbar1);
+        include_toolbar2 = (View) findViewById(R.id.include_toolbar2);
+        //setAdddata();
+        ablBar.addOnOffsetChangedListener(this);
         getHistory();
         //initRefreshLayout();
         mLocationClient = new LocationClient(getApplicationContext());
@@ -146,13 +146,13 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     }
 
     private void initdata() {
-        mCity=(String) SPUtils.get(this,"City","");
-        address= (String) SPUtils.get(this,"NAME","");
-        if (!address.isEmpty()){
+        mCity = (String) SPUtils.get(this, "City", "");
+        address = (String) SPUtils.get(this, "NAME", "");
+        if (!address.isEmpty()) {
             getNow(address);
             getForecast(address);
         }
-        if (!address.isEmpty()){
+        if (!address.isEmpty()) {
             getWeather(mCity);
         }
     }
@@ -161,27 +161,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         for (int i = 0; i < str.length; i++) {
             addCityData.add(new AddCityBean(str[i]));
         }
-        mRecyclerView.setLayoutManager(new MyLayoutManager());
-        mBottomAdapter = new Bottom(addCityData);
-        mRecyclerView.setAdapter(mBottomAdapter);
-        mRecyclerView.setSwitchListener(new BottomRecyclerView.SwitchListener() {
-            @Override
-            public void onSwitch(int realIndex) {
-                getWeather(str[realIndex]);
-                getForecast(str[realIndex]);
-                getNow(str[realIndex]);
-                Toast.makeText(MainActivity.this, "当前选择" + realIndex, Toast.LENGTH_SHORT).show();
-            }
-        });
     }
 
-    private void initNowdata(String City, String tmp, String cond,String condid, String Dir, String sc, String hum, String fl) {
+    private void initNowdata(String City, String tmp, String cond, String condid, String Dir, String sc, String hum, String fl) {
         mainCity.setText(City);//城市
         mainCity1.setText(City);
         mianTmp.setText(tmp + "°");//温度
         mianTmp1.setText(tmp + "°");//温度
         condTxt.setText(cond);//状况
-        cond_img1.setImageResource(GetImgId.getimgid(condid));//状况
+        cond_img1.setImageResource(GetImgIdUtils.getimgid(condid));//状况
         mainDir.setText(Dir);//风向
         mainHum.setText(hum + "%");//湿度
         mianFl.setText(fl + "°");//体感温度
@@ -273,7 +261,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private void setSuggestiondata(List<String> less, List<String> detailed) {
         List<LifeBean> life = new ArrayList<>();
         int img_id[] = {R.mipmap.air, R.mipmap.comf, R.mipmap.cw, R.mipmap.drsg,
-                R.mipmap.flu,R.mipmap.sport, R.mipmap.trav, R.mipmap.uv,};
+                R.mipmap.flu, R.mipmap.sport, R.mipmap.trav, R.mipmap.uv,};
         for (int i = 0; i < img_id.length; i++) {
             life.add(new LifeBean(img_id[i], less.get(i), detailed.get(i)));
         }
@@ -322,7 +310,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                         CurrentBean.HeWeather5Bean.BasicBean basic = response.body().getHeWeather5().get(0).getBasic();
                         CurrentBean.HeWeather5Bean.NowBean now = response.body().getHeWeather5().get(0).getNow();
                         initNowdata(basic.getCity(), now.getTmp(), now.getCond().getTxt()
-                                ,now.getCond().getCode(), now.getWind().getDir(), now.getWind().getSc(), now.getHum(), now.getFl());
+                                , now.getCond().getCode(), now.getWind().getDir(), now.getWind().getSc(), now.getHum(), now.getFl());
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -367,14 +355,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         int offset = Math.abs(verticalOffset);
         int total = appBarLayout.getTotalScrollRange();
         if (offset <= total / 2) {
-            tl_expand.setVisibility(View.VISIBLE);
-            tl_collapse.setVisibility(View.GONE);
-            StatusBarUtil.setColor(this,ContextCompat.getColor(this,R.color.white),0);
-            StatusBarUtil.setTranslucentForImageView(this,0, null);
+            include_toolbar1.setVisibility(View.VISIBLE);
+            include_toolbar2.setVisibility(View.GONE);
+            mianApi.setVisibility(View.VISIBLE);
+            StatusBarUtil.setTranslucentForImageView(this, 0, mianTopBg);
         } else {
-            tl_expand.setVisibility(View.GONE);
-            tl_collapse.setVisibility(View.VISIBLE);
-            StatusBarUtil.setColor(this,ContextCompat.getColor(this,R.color.white),112);
+            include_toolbar1.setVisibility(View.GONE);
+            include_toolbar2.setVisibility(View.VISIBLE);
+            mianApi.setVisibility(View.GONE);
+            StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.white), 112);
         }
     }
 
@@ -385,17 +374,17 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             //经纬度
             //double lati = location.getLatitude();
             //double longa = location.getLongitude();
-                if (!location.getDistrict().isEmpty()) {
-                    address = location.getDistrict();
-                } else {
-                    address = location.getCity();
-                }
+            if (!location.getDistrict().isEmpty()) {
+                address = location.getDistrict();
+            } else {
+                address = location.getCity();
+            }
             getNow(address);
             getForecast(address);
             getWeather(location.getCity());
-            SPUtils.put(MainActivity.this,"City",location.getCity());
-            SPUtils.put(MainActivity.this,"NAME",address);
-                //打印出当前位置
+            SPUtils.put(MainActivity.this, "City", location.getCity());
+            SPUtils.put(MainActivity.this, "NAME", address);
+            //打印出当前位置
             Log.i("TAG", "location.getAddrStr()=" + location.getCity());
         }
 

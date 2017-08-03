@@ -1,14 +1,14 @@
-package com.example.chen.snailweather.util;
+package com.example.chen.snailweather.utils;
 
 import com.example.chen.snailweather.R;
 
 /**
- * 类名: GetImgId
+ * 类名: GetImgIdUtils
  * 作者: 陈海明
  * 时间: 2017-08-02 16:06
  * 描述: NULL
  */
-public class GetImgId {
+public class GetImgIdUtils {
     public static int getimgid(String code) {
         int imgid = R.drawable.code_999;
         switch (code) {
