@@ -6,8 +6,8 @@
     android:gravity="center">
     <ImageView
         android:id="@+id/cond_img1"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
         android:src="@drawable/code_100"
          />
 
@@ -19,7 +19,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/mycolor2"
-        android:textSize="18sp"
+        android:textSize="16sp"
         />
 
 
@@ -28,6 +28,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="33°"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textColor="@color/mycolor2" />
 </LinearLayout>

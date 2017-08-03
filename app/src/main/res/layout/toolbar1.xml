@@ -20,6 +20,6 @@
         android:singleLine="true"
         android:text="深圳"
         android:textColor="@color/white"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
 </LinearLayout>
