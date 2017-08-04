@@ -35,17 +35,11 @@ import com.example.chen.snailweather.bean.LifeBean;
 import com.example.chen.snailweather.bean.WeatherBean;
 import com.example.chen.snailweather.utils.GetImgIdUtils;
 import com.example.chen.snailweather.utils.SPUtils;
-import com.example.chen.snailweather.utils.StatusBarUtils;
 import com.jaeger.library.StatusBarUtil;
-import com.scwang.smartrefresh.header.MaterialHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.constant.SpinnerStyle;
-import com.scwang.smartrefresh.layout.footer.BallPulseFooter;
-import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sunfusheng.marqueeview.MarqueeView;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,6 +95,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @BindView(R.id.refreshLayout)
     SmartRefreshLayout refreshLayout;
 
+
     private View include_toolbar1;
     private View include_toolbar2;
     private ForecastAdapter mNoticeAdter;
@@ -121,7 +116,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        StatusBarUtil.setTranslucentForImageView(this,0,null);
+        StatusBarUtil.setTranslucentForImageView(this, 0, null);
         checkGps();
         settoolbar();
         initview();
@@ -166,11 +161,11 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }
     }
 
-    private void initNowdata(String City,String logdate,String tmp, String cond, String condid, String Dir, String sc, String hum, String fl) {
-        mainCity.setText(mCity+""+address);//城市
+    private void initNowdata(String City, String logdate, String tmp, String cond, String condid, String Dir, String sc, String hum, String fl) {
+        mainCity.setText(mCity + "" + address);//城市
         mainCity1.setText(address);
-        String [] b = logdate.split(" ");//以A作为分割点,将字符串a分割为2个字符串数组分别为
-        updateDate.setText("更新 "+b[1]);
+        String[] b = logdate.split(" ");//以A作为分割点,将字符串a分割为2个字符串数组分别为
+        updateDate.setText("更新 " + b[1]);
         mianTmp.setText(tmp + "°");//温度
         mianTmp1.setText(tmp + "°");//温度
         condTxt.setText(cond);//状况
@@ -181,8 +176,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         mianFl.setText(fl + "°");//体感温度
         SPUtils.put(MainActivity.this, "CONDID", condid);
     }
-
-
 
 
     public void getHistory() {
@@ -208,20 +201,21 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                 });
     }
 
-      private void initRefreshLayout(){
+    private void initRefreshLayout() {
        /*   //设置 Header 为 Material风格
           refreshLayout.setRefreshHeader(new MaterialHeader(this).setShowBezierWave(true));
          //设置 Footer 为 球脉冲
           refreshLayout.setRefreshFooter(new BallPulseFooter(this).setSpinnerStyle(SpinnerStyle.Scale));*/
-          refreshLayout.setOnRefreshListener(new OnRefreshListener() {
-              @Override
-              public void onRefresh(RefreshLayout refreshlayout) {
-                  refreshlayout.finishRefresh(2000);
-                  initdata();
-              }
-          });
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+                refreshlayout.finishRefresh(2000);
+                initdata();
+            }
+        });
 
-      }
+    }
+
     public void getWeather(String city) {
         api.getWeather(city, key)
                 .subscribeOn(Schedulers.io())
@@ -319,7 +313,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                     public void accept(Response<CurrentBean> response) throws Exception {
                         CurrentBean.HeWeather5Bean.BasicBean basic = response.body().getHeWeather5().get(0).getBasic();
                         CurrentBean.HeWeather5Bean.NowBean now = response.body().getHeWeather5().get(0).getNow();
-                        initNowdata(basic.getCity(), basic.getUpdate().getLoc(),now.getTmp(), now.getCond().getTxt()
+                        initNowdata(basic.getCity(), basic.getUpdate().getLoc(), now.getTmp(), now.getCond().getTxt()
                                 , now.getCond().getCode(), now.getWind().getDir(), now.getWind().getSc(), now.getHum(), now.getFl());
                     }
                 }, new Consumer<Throwable>() {
@@ -341,15 +335,24 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         Log.d(TAG, "verticalOffset=" + verticalOffset);
         int offset = Math.abs(verticalOffset);
         int total = appBarLayout.getTotalScrollRange();
+        //int alpha = ((offset / total));//透明度变化速率
+        // Log.e(TAG, "offset ="+offset );
+        Float alpha = Float.valueOf(1 - offset / total);
+        if (offset < 1000) {
+            StatusBarUtil.setTranslucentForImageView(this, 0, null);
+        }
+        if (offset < 100) {
+            mianApi.setVisibility(View.VISIBLE);
+        } else {
+            mianApi.setVisibility(View.GONE);
+        }
         if (offset <= total / 2) {
             include_toolbar1.setVisibility(View.VISIBLE);
             include_toolbar2.setVisibility(View.GONE);
-            mianApi.setVisibility(View.VISIBLE);
-            StatusBarUtil.setTranslucentForImageView(this, 0,null);
+            StatusBarUtil.setTranslucentForImageView(this, 0, null);
         } else {
             include_toolbar1.setVisibility(View.GONE);
             include_toolbar2.setVisibility(View.VISIBLE);
-            mianApi.setVisibility(View.GONE);
             StatusBarUtil.setColor(this, ContextCompat.getColor(this, R.color.white), 112);
         }
     }
@@ -366,7 +369,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             } else {
                 address = location.getCity();
             }
-            mCity=location.getCity();
+            mCity = location.getCity();
             getNow(address);
             getForecast(address);
             getWeather(mCity);
