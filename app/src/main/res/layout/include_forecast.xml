@@ -8,15 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="15dp"
-                android:alpha="0.6"
-                android:background="@mipmap/ico_msg" />
-
             <com.sunfusheng.marqueeview.MarqueeView
                 android:id="@+id/marqueeView"
                 android:layout_width="match_parent"
@@ -25,6 +16,7 @@
                 android:layout_marginRight="10dp"
                 android:alpha="0.6"
                 app:mvInterval="5000"
+                app:mvGravity="center"
                 app:mvTextColor="@color/black"
                 app:mvTextSize="14sp" />
         </LinearLayout>

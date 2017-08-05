@@ -66,4 +66,6 @@ dependencies {
    // https://github.com/scwang90/SmartRefreshLayout
     compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.3-alpha-6'
     compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.3-alpha-6'//没有使用特殊Header，可以不加这行
+
+    compile 'com.zaaach:citypicker:1.1'
 }

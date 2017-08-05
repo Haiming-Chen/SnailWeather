@@ -2,7 +2,7 @@ package com.example.chen.snailweather.Retrofit;
 
 import com.example.chen.snailweather.bean.ForecastBean;
 import com.example.chen.snailweather.bean.CurrentBean;
-import com.example.chen.snailweather.bean.HistoryBean;
+import com.example.chen.snailweather.bean.HourlyBean;
 import com.example.chen.snailweather.bean.WeatherBean;
 
 import io.reactivex.Observable;
@@ -25,9 +25,6 @@ public interface Api {
 
     @GET("v5/now?")
     Observable<Response<CurrentBean>>getNow(@Query("city") String city, @Query("key") String key);
-    //LookUp?key=b31bf74eb7d14f968ce15bc64ad792a6&yue=1&ri=1&type=1&page=1&rows=5
-    @GET("LookUp?")
-    Observable<Response<HistoryBean>>getHistory(@Query("key") String key, @Query("yue") int yue,
-                                                @Query("ri") int ri, @Query("type") int type,
-                                                @Query("page") int page, @Query("rows") int rows);
+    @GET("v5/hourly?")
+    Observable<Response<HourlyBean>>getHourly(@Query("city") String city, @Query("key") String key);
 }

@@ -37,11 +37,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.CitylistActivity"/>
+        <activity
+            android:name="com.zaaach.citypicker.CityPickerActivity"
+            android:theme="@style/CityPicker.NoActionBar"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden|adjustPan"/>
         <service android:name="com.baidu.location.f" android:enabled="true" android:process=":remote">
         </service>
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="NUZsBfuLGmtKBAGSim5WcWkYAln0ghfR" />
+        <meta-data android:name="com.amap.api.v2.apikey"
+            android:value="613aa461ef1fb5e3c87144e30898d711"/>
     </application>
 
 </manifest>

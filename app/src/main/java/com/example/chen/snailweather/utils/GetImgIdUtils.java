@@ -1,7 +1,5 @@
 package com.example.chen.snailweather.utils;
 
-import android.text.AndroidCharacter;
-
 import com.example.chen.snailweather.R;
 
 import java.text.SimpleDateFormat;
@@ -154,10 +152,7 @@ public class GetImgIdUtils {
 
             }
     }
-
-
-
-
+    //判断白天还是晚上
     public static boolean getCurrentTime(){
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
         String hour= sdf.format(new Date());
@@ -168,4 +163,30 @@ public class GetImgIdUtils {
             return false;
         }
     }
+
+    public static int getAqiImgid(String str){
+        int imgid=0;
+        switch (str){
+            case"优":
+                imgid= R.mipmap.notification_pm_excellent_color;
+               break;
+            case"良":
+                imgid= R.mipmap.notification_pm_good_color;
+                break;
+            case"轻度污染":
+                imgid=  R.mipmap.notification_pm_light_color;
+                break;
+            case"中度污染":
+                imgid=  R.mipmap.notification_pm_middle_color;
+                break;
+            case"重度污染":
+                imgid=  R.mipmap.notification_pm_serve_color;
+                break;
+            case"严重污染":
+                imgid=  R.mipmap.notification_pm_serve_color;
+                break;
+        }
+       return imgid;
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.example.chen.snailweather.activity;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,7 +33,7 @@ import com.example.chen.snailweather.adapter.LifeAdapter;
 import com.example.chen.snailweather.bean.AddCityBean;
 import com.example.chen.snailweather.bean.CurrentBean;
 import com.example.chen.snailweather.bean.ForecastBean;
-import com.example.chen.snailweather.bean.HistoryBean;
+import com.example.chen.snailweather.bean.HourlyBean;
 import com.example.chen.snailweather.bean.LifeBean;
 import com.example.chen.snailweather.bean.WeatherBean;
 import com.example.chen.snailweather.utils.GetImgIdUtils;
@@ -40,6 +43,7 @@ import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.sunfusheng.marqueeview.MarqueeView;
+import com.zaaach.citypicker.CityPickerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -87,13 +91,25 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @BindView(R.id.mian_tmp1)
     TextView mianTmp1;//温度
     @BindView(R.id.update_date)
-    TextView updateDate;
+    TextView updateDate;//更新时间
     @BindView(R.id.collapse_layout)
-    CollapsingToolbarLayout collapseLayout;
+    CollapsingToolbarLayout collapseLayout;//天气状况背景
     @BindView(R.id.abl_bar)
     AppBarLayout ablBar;
     @BindView(R.id.refreshLayout)
-    SmartRefreshLayout refreshLayout;
+    SmartRefreshLayout refreshLayout;//下拉刷新
+    @BindView(R.id.img_api)
+    ImageView imgApi;//空气质量的图标
+    @BindView(R.id.bottom_tv)
+    TextView bottomTv;
+    @BindView(R.id.bottom_tv1)
+    TextView bottomTv1;
+    @BindView(R.id.location)
+    LinearLayout location;
+    @BindView(R.id.view)
+    View view;
+    @BindView(R.id.nsv_layout)
+    NestedScrollView nsvLayout;
 
 
     private View include_toolbar1;
@@ -103,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     private List<AddCityBean> addCityData = new ArrayList<>();
     private String str[] = {"深圳", "上海", "广州", "北京", "杭州", "长沙", "重庆", "南京", "武汉"};
     private static String key = "3f1dbd931bfb4640bbea311eff0efe78";//天气的key
-    private static String key2 = "b31bf74eb7d14f968ce15bc64ad792a6";//历史上的今天key
-    private static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 100;
+    private static final int REQUEST_CODE_ACCESS_COARSE_LOCATION = 1;
+    private static final int REQUEST_CODE_PICK_CITY = 0;
     private Api api;
     public LocationClient mLocationClient = null;
     public BDLocationListener myListener = new MyLocationListener();
@@ -126,18 +142,26 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
 
     private void initview() {
-        //状态栏透明和间距处理
         api = RetrofitProvider.get().create(Api.class);
         mianRecyclerView1.setLayoutManager(new LinearLayoutManager(this));
         mianRecyclerView2.setLayoutManager(new LinearLayoutManager(this));
         include_toolbar1 = (View) findViewById(R.id.include_toolbar1);
         include_toolbar2 = (View) findViewById(R.id.include_toolbar2);
         ablBar.addOnOffsetChangedListener(this);
-        getHistory();
         initRefreshLayout();
         mLocationClient = new LocationClient(getApplicationContext());
-        //声明LocationClient类
         mLocationClient.registerLocationListener(myListener);
+        location.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               /* Intent intent=new Intent();
+                intent.setClass(MainActivity.this,CitylistActivity.class);
+                startActivity(intent);*/
+                //启动
+                startActivityForResult(new Intent(MainActivity.this, CityPickerActivity.class),
+                        REQUEST_CODE_PICK_CITY);
+            }
+        });
     }
 
     private void initdata() {
@@ -152,6 +176,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }
         if (!address.isEmpty()) {
             getWeather(mCity);
+            getHourly(mCity);
         }
     }
 
@@ -159,46 +184,6 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         for (int i = 0; i < str.length; i++) {
             addCityData.add(new AddCityBean(str[i]));
         }
-    }
-
-    private void initNowdata(String City, String logdate, String tmp, String cond, String condid, String Dir, String sc, String hum, String fl) {
-        mainCity.setText(mCity + "" + address);//城市
-        mainCity1.setText(address);
-        String[] b = logdate.split(" ");//以A作为分割点,将字符串a分割为2个字符串数组分别为
-        updateDate.setText("更新 " + b[1]);
-        mianTmp.setText(tmp + "°");//温度
-        mianTmp1.setText(tmp + "°");//温度
-        condTxt.setText(cond);//状况
-        cond_img1.setImageResource(GetImgIdUtils.getimgid(condid));//状况
-        collapseLayout.setBackgroundResource(GetImgIdUtils.getbgImgID(condid));
-        mainDir.setText(Dir);//风向
-        mainHum.setText(hum + "%");//湿度
-        mianFl.setText(fl + "°");//体感温度
-        SPUtils.put(MainActivity.this, "CONDID", condid);
-    }
-
-
-    public void getHistory() {
-        Api api2 = RetrofitProvider.get2().create(Api.class);
-        api2.getHistory(key2, 1, 1, 1, 1, 5)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Consumer<Response<HistoryBean>>() {
-                    @Override
-                    public void accept(Response<HistoryBean> response) throws Exception {
-                        List<String> historydata = new ArrayList<>();
-                        for (int i = 0; i < response.body().getResult().size(); i++) {
-                            String str = response.body().getResult().get(i).getYear() + "年的今天: " + response.body().getResult().get(i).getTitle();
-                            historydata.add(str);
-                        }
-                        marqueeView.startWithList(historydata);
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        Log.w("Error", throwable);
-                    }
-                });
     }
 
     private void initRefreshLayout() {
@@ -216,6 +201,50 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
 
     }
 
+    private void initNowdata(String City, String locdate, String tmp, String cond, String condid, String Dir, String sc, String hum, String fl) {
+        mainCity.setText(mCity + "" + address);//城市
+        mainCity1.setText(address);
+        String[] ldate = locdate.split(" ");//以A作为分割点,将字符串a分割为2个字符串数组分别为
+        updateDate.setText("更新 " + ldate[1]);
+        mianTmp.setText(tmp + "°");//温度
+        mianTmp1.setText(tmp + "°");//温度
+        condTxt.setText(cond);//状况
+        cond_img1.setImageResource(GetImgIdUtils.getimgid(condid));//状况
+        collapseLayout.setBackgroundResource(GetImgIdUtils.getbgImgID(condid));
+        mainDir.setText(Dir);//风向
+        mainHum.setText(hum + "%");//湿度
+        mianFl.setText(fl + "°");//体感温度
+        SPUtils.put(MainActivity.this, "CONDID", condid);
+    }
+
+
+    public void getHourly(String city) {
+        api.getHourly(city, key)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer<Response<HourlyBean>>() {
+                    @Override
+                    public void accept(Response<HourlyBean> response) throws Exception {
+                        List<HourlyBean.HeWeather5Bean.HourlyForecastBean> hourlyBeanList = response.body().getHeWeather5().get(0).getHourly_forecast();
+                        List<String> hourlydata = new ArrayList<>();
+                        for (int i = 0; i < hourlyBeanList.size(); i++) {
+                            String[] hourldate = hourlyBeanList.get(i).getDate().split(" ");//以A作为分割点,将字符串a分割为2个字符串数组分别为
+                            String str = "今天 " + hourldate[1] + "  " + hourlyBeanList.get(i).getCond().getTxt() + "  气温 " + hourlyBeanList.get(i).getTmp() +
+                                    "°  湿度  " + hourlyBeanList.get(i).getHum() + "%";
+                            Log.e(TAG, "accept: " + str);
+                            hourlydata.add(str);
+                        }
+                        marqueeView.startWithList(hourlydata);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.w("Error", throwable);
+                    }
+                });
+    }
+
+
     public void getWeather(String city) {
         api.getWeather(city, key)
                 .subscribeOn(Schedulers.io())
@@ -227,6 +256,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
                         WeatherBean.HeWeather5Bean.SuggestionBean suggestionBean = response.body().getHeWeather5().get(0).getSuggestion();
                         mianApi.setText(StrQlty(aqiBean.getCity().getQlty()) + "  " + aqiBean.getCity().getPm25());//空气质量
                         setSuggestiondata(getSuggestiondata(suggestionBean, 1), getSuggestiondata(suggestionBean, 0));
+                        imgApi.setBackgroundResource(GetImgIdUtils.getAqiImgid(aqiBean.getCity().getQlty()));
                     }
                 }, new Consumer<Throwable>() {
                     @Override
@@ -343,8 +373,15 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
         }
         if (offset < 100) {
             mianApi.setVisibility(View.VISIBLE);
+            imgApi.setVisibility(View.VISIBLE);
+
+            bottomTv.setVisibility(View.GONE);
+            bottomTv1.setVisibility(View.VISIBLE);
         } else {
             mianApi.setVisibility(View.GONE);
+            imgApi.setVisibility(View.GONE);
+            bottomTv.setVisibility(View.VISIBLE);
+            bottomTv1.setVisibility(View.GONE);
         }
         if (offset <= total / 2) {
             include_toolbar1.setVisibility(View.VISIBLE);
@@ -373,6 +410,7 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
             getNow(address);
             getForecast(address);
             getWeather(mCity);
+            getHourly(mCity);
             SPUtils.put(MainActivity.this, "City", location.getCity());
             SPUtils.put(MainActivity.this, "NAME", address);
             //打印出当前位置
@@ -422,22 +460,30 @@ public class MainActivity extends AppCompatActivity implements AppBarLayout.OnOf
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        switch (requestCode) {
-            // requestCode即所声明的权限获取码，在checkSelfPermission时传入
-            case 1:
-                BAIDU_READ_PHONE_STATE:
-                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // 获取到权限，作相应处理（调用定位SDK应当确保相关权限均被授权，否则可能引起定位失败）
-                    Toast.makeText(this, "位置权限已开启,开始定位", Toast.LENGTH_SHORT).show();
-                    mLocationClient.start();
-                } else {
-                    Toast.makeText(this, "未开启位置权限,无法定位", Toast.LENGTH_SHORT).show();
-                    // 没有获取到权限，做特殊处理
-                }
-                break;
-            default:
-                break;
+        if (requestCode == REQUEST_CODE_ACCESS_COARSE_LOCATION) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "位置权限已开启,开始定位", Toast.LENGTH_SHORT).show();
+                mLocationClient.start();
+            } else {
+                Toast.makeText(this, "未开启位置权限,无法定位", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+    }
 
+    //重写onActivityResult方法
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_CODE_PICK_CITY && resultCode == RESULT_OK){
+            if (data != null){
+                String city = data.getStringExtra(CityPickerActivity.KEY_PICKED_CITY);
+                getForecast(city);
+                getHourly(city);
+                getNow(city);
+                getWeather(city);
+            }
         }
     }
 }
